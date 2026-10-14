@@ -1,0 +1,7 @@
+| Issue | Type | Line(s) | Description | Fix Approach |
+|-------|------|---------|-------------|--------------|
+| Invalid order status in demo | Medium, functional bug | 72 | The demo used `teleported`, which is not a valid order status, so the update failed and the order stayed placed. | Change the demo status to the valid `cooking` status. |
+| Unknown dishes receive a made-up price | Medium, correctness | 14 | An item missing from the menu silently cost 99, which could produce an incorrect order total. | Reject unknown menu items with a clear `ValueError` instead of inventing a price. |
+| Pickle can execute unsafe data during restore | Medium, security | 53 | `pickle.load` can execute code when reading a crafted backup file. Bandit reported this as B301, with an additional B403 warning for importing pickle. | Store and restore backups as JSON, which does not execute data during loading. |
+| Invalid orders were accepted | Low, input validation | 70 | Orders with a blank customer name or no items were accepted and could be marked delivered. | Reject empty customer names and item lists with clear `ValueError` messages. |
+| Missing docstrings and inconsistent formatting | Low, maintainability | 1-70 | Pylint reported missing module and function docstrings and old-style string formatting. Flake8 reported a line over its 79-character limit. | Add concise documentation and format output with an f-string and wrapped lines. |
